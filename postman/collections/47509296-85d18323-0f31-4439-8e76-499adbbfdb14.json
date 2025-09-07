@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "47509296-85d18323-0f31-4439-8e76-499adbbfdb14",
+		"name": "Student API Chaining",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create New Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b797114-7188-442f-9e35-71bea146f367",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"// Capture only the id as string\r",
+							"pm.environment.set(\"id\", jsonData.id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "47509296-cbdd7782-4468-4982-9056-b23e5f22dde1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\":\"Kane\",\r\n\t\"location\":\"USA\",\r\n\t\"phone\":\"1123456789\",\r\n\t\"course\":\"Manual Testing\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "709eca12-4975-4838-83df-b548fdb8d85a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "47509296-ad47a252-e1de-4512-ae1a-505068e64137",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/students/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"id": "47509296-fa4259b9-31a5-484a-a030-f4d9e72d9d82",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/students/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
